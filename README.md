@@ -21,7 +21,11 @@ To install without cloning you can install from this repo.
 ```bash
 npm install -g serverless
 
-serverless install -u https://github.com/johnbarney/Securitas --awsadmin (AWS Administrators distribution group)
+sls install -u https://github.com/johnbarney/Securitas
+
+cd Securitas
+
+sls deploy --awsadmin (AWS Administrators distribution group)
 ```
 
 ### What to Expect:
