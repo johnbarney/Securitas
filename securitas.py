@@ -41,7 +41,7 @@ def keyrotation(event, context):
             if key_pair['Status'] == 'Active':
                 Id = key_pair['AccessKeyId']
                 # 60 day warning
-                if (key_pair['CreateDate'] - TODAY) == -60:
+                if (key_pair['CreateDate'].date() - TODAY) == -60:
                     __compose_email(recipient=u['UserName'],
                                     subject="AWS Key expire in 30 days!",
                                     body=f"Your AWS Key {Id} will expire and "
@@ -50,7 +50,7 @@ def keyrotation(event, context):
                                     "the console at any time. Please email "
                                     f"{AWS_ADMIN} with any questions.")
                 # 5 day warning
-                elif (key_pair['CreateDate'] - TODAY) == -85:
+                elif (key_pair['CreateDate'].date() - TODAY) == -85:
                     __compose_email(recipient=u['UserName'],
                                     subject="AWS Key expire in 5 days!",
                                     body=f"Your AWS Key {Id} will expire and "
@@ -59,7 +59,7 @@ def keyrotation(event, context):
                                     "the console at any time. Please email "
                                     f"{AWS_ADMIN} with any questions.")
                 # one day warning
-                elif (key_pair['CreateDate'] - TODAY) == -89:
+                elif (key_pair['CreateDate'].date() - TODAY) == -89:
                     __compose_email(recipient=u['UserName'],
                                     subject="AWS Key expire tomorrow!",
                                     body=f"Your AWS Key {Id} will expire and "
@@ -68,7 +68,7 @@ def keyrotation(event, context):
                                     "the console at any time. Please email "
                                     f"{AWS_ADMIN} with any questions.")
                 # Delete key
-                elif (key_pair['CreateDate'] - TODAY) < -90:
+                elif (key_pair['CreateDate'].date() - TODAY) < -90:
                     IAM_RESOURCE.AccessKey(
                         u['UserName'],
                         key_pair['AccessKeyId']).delete
