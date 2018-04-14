@@ -1,8 +1,8 @@
-import boto3
-import re
 import datetime
 import os
+import re
 
+import boto3
 
 # Get today's date
 TODAY = datetime.datetime.utcnow().date()
@@ -69,7 +69,7 @@ def keyrotation(event, context):
                                     f"{AWS_ADMIN} with any questions.")
                 # Delete key
                 elif (key_pair['CreateDate'].date() - TODAY) < -90:
-                    IAM_RESOURCE.AccessKey(
+                    delete = IAM_RESOURCE.AccessKey(
                         u['UserName'],
                         key_pair['AccessKeyId']).delete
                     __compose_email(recipient=u['UserName'],
@@ -91,7 +91,9 @@ def mfacheck(event, context):
                             subject="No MFA Device found!",
                             body="Your AWS account has no MFA device "
                             "associated. Please create one as soon as possible"
-                            f"! Please email {AWS_ADMIN} with any questions.")
+                            f"! Please email {AWS_ADMIN} with any questions. "
+                            "https://docs.aws.amazon.com/IAM/latest/UserGuide"
+                            "/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-iam-user")
     return {"message": "Finished MFA audit successfully."}
 
 
