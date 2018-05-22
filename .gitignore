@@ -21,4 +21,4 @@ var/
 
 # JetBrains
 .idea/
-Securitas.iml
+*.iml

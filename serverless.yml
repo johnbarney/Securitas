@@ -6,6 +6,7 @@ provider:
   stage: production
   region: us-east-1
   memorySize: 128
+  logRetentionInDays: 14
   environment:
     AWS_ADMIN: ${opt:awsadmin}
 
