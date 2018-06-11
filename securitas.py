@@ -71,7 +71,7 @@ def keyrotation(event, context):
                 elif (key_pair['CreateDate'].date() - TODAY) < datetime.timedelta(-90):
                     delete = IAM_RESOURCE.AccessKey(
                         u['UserName'],
-                        key_pair['AccessKeyId']).delete
+                        key_pair['AccessKeyId']).delete()
                     __compose_email(recipient=u['UserName'],
                                     subject="AWS Key expired!",
                                     body=f"Your AWS Key {Id} was over 90 days "
